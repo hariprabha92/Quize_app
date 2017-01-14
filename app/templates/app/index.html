@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+     
+	
+
+    {% for post in posts %}
+        
+      <p class="question">{{post.Question}}</p>
+      <ul class="choice">
+      <input type="radio" name={{post.number}} value="1"> {{post.Choice1}} <br/>
+      <input type="radio" name={{post.number}} value="2"> {{post.Choice2}} <br/>
+      <input type="radio" name={{post.number}} value="3"> {{post.Choice3}} <br/>
+      <input type="radio" name={{post.number}} value="4"> {{post.Choice4}} <br/>
+      <input type="radio" name={{post.number}} value="5"> {{post.Choice5}} <br/>
+
+      </ul>
+            
+    {% endfor %}
+{% endblock content %}
