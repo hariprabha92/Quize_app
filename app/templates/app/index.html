@@ -1,20 +1,33 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-     
-	
+     <div class = 'questionnaire'>
+   
+   
 
-    {% for post in posts %}
-        
-      <p class="question">{{post.Question}}</p>
-      <ul class="choice">
-      <input type="radio" name={{post.number}} value="1"> {{post.Choice1}} <br/>
-      <input type="radio" name={{post.number}} value="2"> {{post.Choice2}} <br/>
-      <input type="radio" name={{post.number}} value="3"> {{post.Choice3}} <br/>
-      <input type="radio" name={{post.number}} value="4"> {{post.Choice4}} <br/>
-      <input type="radio" name={{post.number}} value="5"> {{post.Choice5}} <br/>
 
-      </ul>
-            
+<form action= 'answers/' method = "POST" >
+    {% for question in questions %}       
+
+	<div class = 'question'>Q. {{ question.Question }} </div><br>
+<ul id= "choices" class='select'>
+    <input type = "radio" name="{{question.number}}" value="{{question.Choice1}}">{{question.Choice1}}<br>
+    <input type = "radio" name="{{question.number}}" value="{{question.Choice2}}">{{question.Choice2}}<br>
+    <input type = "radio" name="{{question.number}}" value="{{question.Choice3}}">{{question.Choice3}}<br>
+    <input type = "radio" name="{{question.number}}" value="{{question.Choice4}}">{{question.Choice4}}<br>
+    <input type = "radio" name="{{question.number}}" value="{{question.Choice5}}">{{question.Choice5}}<br>
+
+  
+
+ </ul>
+     <br> 
+
     {% endfor %}
+    <input type="submit" class="submit" id="submit" value="Submit"/>
+    {% csrf_token %}
+    </div>
+ </form>
+
+
+
 {% endblock content %}

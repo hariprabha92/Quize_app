@@ -12,7 +12,7 @@ class Question(models.Model):
     Choice3 = models.CharField(max_length=200)
     Choice4 = models.CharField(max_length=200)
     Choice5 = models.CharField(max_length=200)
-    # = models.CharField(max_length=200)
+    correct_answer = models.CharField(max_length=200)
 
 
 

@@ -1,14 +1,23 @@
-#from django.shortcuts import render
-#from django.contrib.auth.decorators import login_required
-#from .forms import PostForm
-#from .forms import PostForm, CommentForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.shortcuts import redirect
 from django.utils import timezone
-#from .models import Post
+from django.http import HttpResponse
 from .models import Question
+from django.views.decorators.csrf import csrf_exempt
+import requests
 
 def home(request):
-    posts = Question.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'app/index.html', {'posts': posts})
+    questions = Question.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'app/index.html', {'questions': questions})
 
+def answers(request):
+    questions = Question.objects.all() #fetches the query set.
+    score = 0 #initially score is zero.
+    for question in questions:
+        answer = question.correct_answer #fetches answer given in the model.
+        entered_answer = request.POST.get(str(question.number)) #fetches entered answer by the candidate
+        if(entered_answer == answer): #checks the entered answer is correct or not
+            score+=1 
+    score*=5
+    return render(request, 'app/answer.html', {'score':score})
+    
