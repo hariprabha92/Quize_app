@@ -10,14 +10,14 @@ def home(request):
     questions = Question.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'app/index.html', {'questions': questions})
 
-def answers(request):
-    questions = Question.objects.all() #fetches the query set.
-    score = 0 #initially score is zero.
+def results(request):
+    questions = Question.objects.all() 
+    score = 0
     for question in questions:
-        answer = question.correct_answer #fetches answer given in the model.
+        answer = question.correct_answer 
         entered_answer = request.POST.get(str(question.number)) #fetches entered answer by the candidate
-        if(entered_answer == answer): #checks the entered answer is correct or not
+        if(entered_answer == answer): 
             score+=1 
     score*=5
-    return render(request, 'app/answer.html', {'score':score})
+    return render(request, 'app/results.html', {'score':score})
     
