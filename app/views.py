@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 
 def home(request):
-    questions = Question.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    questions = Question.objects.all
     return render(request, 'app/index.html', {'questions': questions})
 
 def results(request):

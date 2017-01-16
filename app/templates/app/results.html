@@ -1,9 +1,12 @@
 {% extends 'app/base.html' %}
 {%load staticfiles%}
 {% block content %}
-
-<h2>Your score is {{score}}
-
+{% if score == 0  %}
+	<h3>Sorry your score is {{score}}</h3>
+{% else %}
+	<h2><p>Congratulations ...............</p>
+        Your score is {{score}}</h2>
+{%endif%}
 
 {% endblock content %}
 
